@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block contents %}
+<h1 class="text-center">{{question.question}}</h1><br><br>
+<div class="group-tabs">
+    {% for opt in options %}
+    <div class="polls">
+        <div class="polls-tab result">
+            {{opt.choice}}
+            <div class="vote-bar">{{opt.vote}}</div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+    
+{% endblock contents %}

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block contents %}
+<h1 class="text-center">Current Polls</h1><br><br>
+{% for m in messages %}
+<div class="message-tab">
+    <p class="message">{{m}}</p>
+</div>
+{% endfor %}
+<br>
+<div class="group-tabs">
+    {% for q in question %}
+    <div class="polls">
+        <div class="polls-tab">
+            <a href="/vote/{{q.id}}">{{q.question}}</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<br>
+<div class="topic-options-btn">
+    <button type="button" class="create-btn" onclick="CreatePoll()">Create Poll</button>
+    <button type="button" class="option-btn" onclick="CreateOption()">Add Option</button>
+</div>
+<br>
+<div class="create-polls">
+    <form action="{% url 'create' %}" method="post" id="create" name="create">
+        {% csrf_token %}
+        <h2>Create a Poll</h2>
+        <label for="poll">Write your topic</label>
+        <input type="text" name="poll"><br>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+<div class="create-options">
+    <form action="{% url 'addopt' %}" method="post" id="option" name='option'>
+        {% csrf_token %}
+        <h2>Create Options</h2>
+        <label for="topic">Select your topic</label>
+        <select name="selected-question" id="question">
+            {% for q in question %}
+            <option value="{{q.id}}">{{q.question}}</option>
+            {% endfor %}
+        </select><br>
+        <label for="poll">Add your option</label>
+        <input type="text" name="option" id="option"><br>
+        <button type="submit">Add</button>
+    </form>
+</div>
+{% endblock contents %}
+

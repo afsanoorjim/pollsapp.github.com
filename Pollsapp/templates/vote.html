@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block contents %}
+<h1 class="text-center">{{question.question}}</h1><br><br>
+<form action="/result/{{question.id}}/" method="post" class="opt-form">
+    {% csrf_token %}
+    <div class="group-tabs">
+        {% for opt in options %}
+        <div class="polls">
+            <div class="polls-tab">
+                <input type="radio" name="selected-option" value="{{opt.id}}" class="radio-input" >
+                {{opt.choice}}
+            </div>
+        </div>
+        {% endfor %}
+    </div><br>
+    <button type="submit" class="opt-submit">Submit</button>
+</form>
+
+{% endblock contents %}
